@@ -2,26 +2,11 @@
 
 namespace App;
 
-class Route{
+use MF\Init\Bootstrap;
 
-    private $routes;
-
-    //
-    public function __construct(){
-        $this->initRoutes();
-        $this->run($this->getUrl());
-    }
-    //recupera e seta as possiveis rotas
-    public function getRoutes(){
-        return $this->routes;
-    }
-
-    public function setRoutes(array $routes){
-        $this->routes = $routes;
-    }
-
+class Route extends Bootstrap {
     //Qual o controller e a sua respectiva ação que sera tomada para cada path
-    public function initRoutes(){
+    protected function initRoutes(){
 
         $routes['home'] = array(
             'route' => '/',
@@ -32,28 +17,9 @@ class Route{
         $routes['sobre_nos']= array(
             'route' => '/sobre_nos',
             'controller' => 'IndexController',
-            'action' => 'sobre_nos'
+            'action' => 'sobreNos'
         );
-        $this->setRoutes($routes);
-    }
-
-    public function run($url){
-        foreach($this->getRoutes() as $key => $route){
-            if($url == $route['route']){
-                $class = "App\\Controllers\\".ucfirst($route["controller"]);
-
-                $controller = new $class;
-
-                $action = $route['action'];
-
-                $controller->$action();
-            }
-        }
-    }
-
-    //pega o path acessado pelo usuario
-    public function getUrl(){
-        return parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+        parent::setRoutes($routes);
     }
 }
 
