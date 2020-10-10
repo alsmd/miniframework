@@ -42,7 +42,7 @@ abstract class Bootstrap{
             }
         }
     }
-
+    
     
     //pega o path acessado pelo usuario
     protected function getUrl(){
