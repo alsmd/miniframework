@@ -2,6 +2,9 @@
 <hr>
 <?php 
     foreach($this->view->dados as $dado){
-        echo $dado . "<br>";
+        echo 'ID - '.$dado['id'] . "<br>";
+        echo 'Produto - '.$dado['descricao'] . "<br>";
+        echo 'Preco - '.$dado['preco'] . "<br>";
+        echo"<hr>";
     }
 ?>

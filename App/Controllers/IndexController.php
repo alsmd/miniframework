@@ -3,16 +3,24 @@
 namespace App\Controllers;
 
 use MF\Controller\Action;
+use App\Connection;
+use App\Models\Produto;
 
 class IndexController extends Action{
 
     public function index(){
-
-        $this->view->dados = array("sofa","cadeira","cama"); //podemos recuperar essa informação dentro da nossa view
+        //instancia de conexão
+        $conn = Connection::getDb(); 
+        //instanciar modelo
+        $produto = new Produto($conn);
+        //recupera todos os produtos do BD
+        $produtos = $produto->getProdutos();
+        //deixa esses dados acessivel para a view carregada
+        $this->view->dados = $produtos;
+        //carrega a view correspondente ao action em questão 
         $this->render('index','layout1');
     }
     public function sobreNos(){
-        $this->view->dados = array("Maça","Abacate","Mamão"); //podemos recuperar essa informação dentro da nossa view
         $this->render('sobreNos','layout1');
     }
     
